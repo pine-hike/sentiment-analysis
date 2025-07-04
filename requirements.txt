@@ -1,0 +1,11 @@
+os
+re
+nltk
+pandas
+matplotlib.pyplot
+googleapiclient.discovery
+nltk.corpus
+nltk.tokenize
+vaderSentiment.vaderSentiment
+collections
+wordcloud
