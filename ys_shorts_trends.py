@@ -14,8 +14,12 @@ from wordcloud import WordCloud
 nltk.download('stopwords')
 nltk.download('punkt')
 
+# Retrieve YouTube API key from environment variable
+API_KEY = os.getenv('YOUTUBE_API_KEY')
+if not API_KEY:
+    raise ValueError("API_KEY environment variable is not set")
+
 # Set up YouTube API client
-API_KEY = 'YOUR_YOUTUBE_API_KEY'
 YOUTUBE = build('youtube', 'v3', developerKey=API_KEY)
 
 # Define sentiment analyzer
