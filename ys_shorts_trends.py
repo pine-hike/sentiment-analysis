@@ -64,13 +64,16 @@ def generate_word_cloud(keywords):
     plt.figure(figsize=(10, 5))
     plt.imshow(wordcloud, interpolation='bilinear')
     plt.axis('off')
-    plt.show()
+    plt.savefig("plots/wordcloud.png"))
 
 # Main function to gather insights
 def main():
     shorts = fetch_trending_shorts()
     all_comments = []
     all_keywords = []
+    # Create a directory for plots if it doesn't exist
+    if not os.path.exists('plots'):
+        os.makedirs('plots')
 
     for short in shorts:
         title = short['snippet']['title']
@@ -98,7 +101,7 @@ def main():
     plt.title('Sentiment Distribution')
     plt.xlabel('Sentiment')
     plt.ylabel('Count')
-    plt.show()
+    plt.savefig("plots/sentiment_distribution.png")
 
 if __name__ == '__main__':
     main()
