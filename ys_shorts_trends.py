@@ -13,6 +13,7 @@ from wordcloud import WordCloud
 # Initialize NLTK resources
 nltk.download('stopwords')
 nltk.download('punkt')
+nltk.download('punkt_tab')
 
 # Retrieve YouTube API key from environment variable
 API_KEY = os.getenv('YOUTUBE_API_KEY')
