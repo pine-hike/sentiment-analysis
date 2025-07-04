@@ -1,4 +1,4 @@
-name: Generate and Save Plots #
+name: Generate and Save Plots ##
 
 on:
   push:
