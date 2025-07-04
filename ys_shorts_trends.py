@@ -64,7 +64,7 @@ def generate_word_cloud(keywords):
     plt.figure(figsize=(10, 5))
     plt.imshow(wordcloud, interpolation='bilinear')
     plt.axis('off')
-    plt.savefig("plots/wordcloud.png"))
+    plt.savefig("plots/wordcloud.png")
 
 # Main function to gather insights
 def main():
