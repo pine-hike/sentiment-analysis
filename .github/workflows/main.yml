@@ -23,6 +23,8 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run YT shorts analysis
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: |
           python ys_shorts_trends.py
 
