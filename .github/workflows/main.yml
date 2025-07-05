@@ -1,35 +1,35 @@
-name: Generate and Save Plots
+# name: Generate and Save Plots
 
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
 
-jobs:
-  generate_plots:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+# jobs:
+#   generate_plots:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.9'
+#       - name: Set up Python
+#         uses: actions/setup-python@v2
+#         with:
+#           python-version: '3.9'
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+#       - name: Install dependencies
+#         run: |
+#           python -m pip install --upgrade pip
+#           pip install -r requirements.txt
 
-      - name: Run YT shorts analysis
-        env:
-          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-        run: |
-          python ys_shorts_trends.py
+#       - name: Run YT shorts analysis
+#         env:
+#           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+#         run: |
+#           python ys_shorts_trends.py
 
-      - name: Upload plots as artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: generated-plots
-          path: plots/
+#       - name: Upload plots as artifacts
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: generated-plots
+#           path: plots/
