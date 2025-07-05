@@ -1,4 +1,4 @@
-from pygooglenews import GoogleNews
+from gnews import GNews
 from newspaper import Article
 from textblob import TextBlob
 import json, os
@@ -6,11 +6,16 @@ from datetime import date
 
 OUTPUT = "uplift_news"
 os.makedirs(OUTPUT, exist_ok=True)
-gn = GoogleNews(lang='en', country='ALL', period='2d', max_results=10)
+google_news = GNews(
+    language='en',               # English-language articles (change to 'de', 'es', etc. as needed)
+    country='ALL',               # Special flag for global coverage
+    period='2d',                 # Last 1 day
+    max_results=10              # Fetch up to 100 articles
+)
 
 def fetch_positive():
     today = date.today().isoformat()
-    search = gn.search("feel good OR uplifting OR heartwarming")
+    search =  google_news.get_top_news()
     items = [i for i in search['entries']]
     result = []
     for entry in items:
