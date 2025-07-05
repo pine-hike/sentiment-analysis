@@ -6,12 +6,12 @@ from datetime import date
 
 OUTPUT = "uplift_news"
 os.makedirs(OUTPUT, exist_ok=True)
-gn = GoogleNews(lang='en', country='US')
+gn = GoogleNews(lang='en', country='ALL', period='2d', max_results=10)
 
 def fetch_positive():
     today = date.today().isoformat()
     search = gn.search("feel good OR uplifting OR heartwarming")
-    items = [i for i in search['entries'] if today in i.published]
+    items = [i for i in search['entries']]
     result = []
     for entry in items:
         art = Article(entry.link)
@@ -29,6 +29,7 @@ def fetch_positive():
             "url": entry.link,
             "summary": art.summary
         })
+    print(f"Found {len(result)} articles.")
     return sorted(result, key=lambda x: TextBlob(x["summary"]).sentiment.polarity, reverse=True)[:5]
 
 def save(item):
