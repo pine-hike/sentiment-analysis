@@ -10,7 +10,7 @@ google_news = GNews(
     language='en',               # English-language articles (change to 'de', 'es', etc. as needed)
     country='ALL',               # Special flag for global coverage
     period='2d',                 # Last 1 day
-    max_results=10              # Fetch up to 100 articles
+    max_results=100              # Fetch up to 100 articles
 )
 
 def fetch_positive():
@@ -23,8 +23,10 @@ def fetch_positive():
         art.download(); art.parse(); art.nlp()
         text = art.text.lower()
         if any(kw in text for kw in ["war","crime","conflict"]):
+            print("skipparticle because of keyword")
             continue
         if TextBlob(text).sentiment.polarity < 0.1:
+            print("skipparticle because of polarity")
             continue
         result.append({
             "title": art.title,
