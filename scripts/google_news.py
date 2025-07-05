@@ -19,7 +19,7 @@ def fetch_positive():
     items = [i for i in search]
     result = []
     for entry in items:
-        art = Article(entry.link)
+        art = Article(entry["url"])
         art.download(); art.parse(); art.nlp()
         text = art.text.lower()
         if any(kw in text for kw in ["war","crime","conflict"]):
@@ -28,10 +28,10 @@ def fetch_positive():
             continue
         result.append({
             "title": art.title,
-            "source": entry.source,
-            "timestamp": entry.published,
-            "topic": entry.tags,
-            "url": entry.link,
+            "source": entry.get("source"),
+            "timestamp": entry.get("published date"),
+            "topic": entry.get("topic", "General"),
+            "url": entry.get("url"),
             "summary": art.summary
         })
     print(f"Found {len(result)} articles.")
