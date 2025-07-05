@@ -3,3 +3,4 @@ newspaper3k
 textblob
 pygooglenews
 lxml_html_clean
+gnews
