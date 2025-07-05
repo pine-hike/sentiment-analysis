@@ -30,7 +30,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f requirements_news.txt ]; then pip install -r requirements_news.txt; fi
 
       - name: Run Python script
         run: python scripts/fetch_news.py
