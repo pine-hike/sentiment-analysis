@@ -1,4 +1,4 @@
 feedparser
-newspaper
+newspaper3k
 textblob
 
