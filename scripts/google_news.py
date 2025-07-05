@@ -16,7 +16,7 @@ google_news = GNews(
 def fetch_positive():
     today = date.today().isoformat()
     search =  google_news.get_top_news()
-    items = [i for i in search['entries']]
+    items = [i for i in search]
     result = []
     for entry in items:
         art = Article(entry.link)
