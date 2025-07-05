@@ -22,12 +22,12 @@ def fetch_positive():
         art = Article(entry["url"])
         art.download(); art.parse(); art.nlp()
         text = art.text.lower()
-        if any(kw in text for kw in ["war","crime","conflict"]):
-            print("skipparticle because of keyword")
+        if any(kw in text for kw in ["war","crime","conflict", "death", "massacre", "died", "dies", "rampage", "shooting"]):
+            print("skipp article because of keyword")
             continue
-        if TextBlob(text).sentiment.polarity < 0.1:
-            print("skipparticle because of polarity")
-            continue
+        # if TextBlob(text).sentiment.polarity < 0.1:
+        #     print("skipparticle because of polarity")
+        #     continue
         result.append({
             "title": art.title,
             "source": entry.get("source"),
