@@ -37,14 +37,14 @@ def fetch_positive():
             "summary": art.summary
         })
     print(f"Found {len(result)} articles.")
-    return sorted(result, key=lambda x: TextBlob(x["summary"]).sentiment.polarity, reverse=True)[:5]
+    return sorted(result, key=lambda x: TextBlob(x["summary"]).sentiment.polarity, reverse=True)
 
-def save(item):
-    fname = f"{item['title'][:50].replace(' ','_')}.json"
+def save(item, idx):
+    fname = f"{item['title'][:50].replace(' ','_')}_{idx}.json"
     with open(os.path.join(OUTPUT, fname), "w", encoding="utf-8") as f:
         json.dump(item, f, indent=2)
     print("Saved:", fname)
 
 if __name__=="__main__":
-    for art in fetch_positive():
-        save(art)
+    for idx, art in enumerate(fetch_positive()):
+        save(art, idx)
