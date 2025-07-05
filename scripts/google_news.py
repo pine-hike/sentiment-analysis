@@ -1,0 +1,42 @@
+from pygooglenews import GoogleNews
+from newspaper import Article
+from textblob import TextBlob
+import json, os
+from datetime import date
+
+OUTPUT = "uplift_news"
+os.makedirs(OUTPUT, exist_ok=True)
+gn = GoogleNews(lang='en', country='US')
+
+def fetch_positive():
+    today = date.today().isoformat()
+    search = gn.search("feel good OR uplifting OR heartwarming")
+    items = [i for i in search['entries'] if today in i.published]
+    result = []
+    for entry in items:
+        art = Article(entry.link)
+        art.download(); art.parse(); art.nlp()
+        text = art.text.lower()
+        if any(kw in text for kw in ["war","crime","conflict"]):
+            continue
+        if TextBlob(text).sentiment.polarity < 0.1:
+            continue
+        result.append({
+            "title": art.title,
+            "source": entry.source,
+            "timestamp": entry.published,
+            "topic": entry.tags,
+            "url": entry.link,
+            "summary": art.summary
+        })
+    return sorted(result, key=lambda x: TextBlob(x["summary"]).sentiment.polarity, reverse=True)[:5]
+
+def save(item):
+    fname = f"{item['title'][:50].replace(' ','_')}.json"
+    with open(os.path.join(OUTPUT, fname), "w", encoding="utf-8") as f:
+        json.dump(item, f, indent=2)
+    print("Saved:", fname)
+
+if __name__=="__main__":
+    for art in fetch_positive():
+        save(art)

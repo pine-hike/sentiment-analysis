@@ -33,7 +33,7 @@ jobs:
           if [ -f requirements_news.txt ]; then pip install -r requirements_news.txt; fi
 
       - name: Run Python script
-        run: python scripts/fetch_news.py
+        run: python scripts/google_news.py
 
       - name: Commit and push generated files
         run: |
